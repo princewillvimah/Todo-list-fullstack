@@ -8,6 +8,58 @@ import Welcome from './screen/Welcome';
 import { StatusBar } from 'expo-status-bar';
 import { supabase } from './lib/supabase';
 import Homescreen from './screen/Homescreen';
+import Task from './screen/Task';
+import { Entypo } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons'; 
+import AddTask from './screen/AddTask';
+
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import DrawerContent from './Component/DrawerContent';
+import { PaperProvider,} from 'react-native-paper';
+
+const Drawer = createDrawerNavigator();
+
+function MyDrawer() {
+  return (
+    <Drawer.Navigator drawerContent={(props)=> <DrawerContent {...props}/>
+   } screenOptions={{
+      headerTitleAlign:'center'
+    }}>
+      <Drawer.Screen name="Home" component={Homescreen} options={{
+        headerTitleAlign:'center'
+      }} />
+      <Drawer.Screen name="Task" component={Task} />
+    </Drawer.Navigator>
+  );
+}
+
+
+
+
+const Tab = createMaterialBottomTabNavigator();
+
+function MyTabs() {
+  return (
+    <PaperProvider>
+    <Tab.Navigator>
+      <Tab.Screen name="home" component={MyDrawer} options={{
+        tabBarIcon:({color})=>(
+          <FontAwesome5 name="home" size={24} color={color} />
+        )
+      }}/>
+      <Tab.Screen name="Add Tasks" component={AddTask} 
+      options={{
+        tabBarIcon:({color})=>(
+          <Entypo name="add-to-list" size={24} color={color} />
+        )
+      }}
+      />
+
+    </Tab.Navigator>
+    </PaperProvider>
+  );
+}
 
 const Stack = createStackNavigator();
 const MyTheme = {
@@ -34,11 +86,11 @@ const Main = () => {
 
        <StatusBar style=''/>
         <Stack.Navigator screenOptions={{
-          headerShown:false
+          headerShown:false,
         }}>
         
         {session && session.user ?    (
-          <Stack.Screen name="Home" component={Homescreen} />
+          <Stack.Screen name="tabs" component={MyTabs}/>
         )
         :( 
           <>

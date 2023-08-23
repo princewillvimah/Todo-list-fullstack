@@ -56,7 +56,7 @@ const handleSignup=async()=>{
     Toast.show({
             type: 'error',
             text1: 'FAILED',
-            text2: 'FAILED'
+            text2: error.message
     });
    }  
    if(!error){

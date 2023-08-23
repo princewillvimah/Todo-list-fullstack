@@ -3,9 +3,9 @@ import React from 'react'
 import { Heading, Input } from 'native-base'
 import { Colors } from '../constant/Color'
 
-const TitleComponent = ({title,fontSize}) => {
+const TitleComponent = ({title,fontSize,color=Colors.Headingcolor,fontWeight}) => {
   return (
-  <Heading color={Colors.Headingcolor} size={fontSize}>
+  <Heading color={color} fontWeight={fontWeight&& fontWeight} size={fontSize}>
   {title}
   </Heading>
   )

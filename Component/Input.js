@@ -3,9 +3,9 @@ import React from 'react'
 import { Input } from 'native-base';
 import { Colors } from '../constant/Color';
 
-const InputComponet = ({placeholder,value,setValue,secure=false,}) => {
+const InputComponet = ({placeholder,value,setValue,secure=false,style}) => {
   return (
-   <Input style={styles.inputs} 
+   <Input style={[styles.inputs,style]} 
    value={value}
    onChangeText={setValue}
    variant={'unstyled'} placeholder={placeholder} placeholderTextColor={'black'}
